@@ -15,10 +15,25 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-3. add the current user to the "docker" group, so we can run commands without `sudo`
+3. Add the current user to the "docker" group, so we can run commands without `sudo`. (You might need to start a new terminal or reboot your computer for this to take effect).
 ```Bash
 sudo usermod -aG docker $(whoami)
 ```
+
+4. Test it out! Use the `docker run hello-world` command to download and run the latest Hello World container from the Docker Hub. The output should look like this:
+```Shell Session
+mpcrpaul@mpcrpaul-MS-7B61:~$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete 
+Digest: sha256:fc6a51919cfeb2e6763f62b6d9e8815acbf7cd2e476ea353743570610737b752
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...
+```
+
 # Install CUDA Driver (Required to use GPUs)
 
 Only do this part if you don't already have a CUDA driver installed.
@@ -82,6 +97,31 @@ sudo apt-get install nvidia-[VERSION]
 ```
 
 4. Restart your computer, and `nvidia-smi` should work.
-```
+```Bash
 sudo reboot
+```
+
+# Install Nvidia-Docker (Required to use GPUs)
+
+1. Add the Nvidia-Docker repository
+```Bash
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+```
+
+2. Install the Nvidia-Docker runtime
+```Bash
+sudo apt-get install -y nvidia-container-toolkit
+```
+
+3. Restart the docker daemon so it will see the new runtime.
+```Bash
+sudo systemctl restart docker
+```
+
+4. Test it out! The following command will download a container from NVIDIA's Docker Hub account which contains version 9.0 of the CUDA Toolkit. The `nvidia-smi` command will be run from inside the container, and we will see the same output as we would on the host. the `--gpus all` flag tells docker to use the Nvidia-Docker runtime.
+```Bash
+docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
 ```
