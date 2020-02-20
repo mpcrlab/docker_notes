@@ -23,7 +23,7 @@
 | `docker pull [IMAGE]` | Pull Image from Docker Hub |
 | `docker image rm [IMAGE]` | Delete Image from Host |
 
-### Build Images
+#### Build Images
 
 | Command | Description |
 | --- | --- |
