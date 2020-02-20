@@ -42,7 +42,9 @@ CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--al
 ```
 * This is a Dockerfile that adds PyTorch and Jupyter Notebook layers on top of a CUDA image.
 * The `FROM` command says to start with the CUDA image.
-* `RUN` commands run in a temporary container and add the result as a new "layer" of the image.
+* `RUN` commands run in a temporary container and add the result as a new "layer" of the image. These are basically lines of a shell script.
+* `CMD` says what program will start by default when the image is used to run a container.
+* The Dockerfile commands are confusing, so never write them yourself. Always copy and paste from the internet!
 
 ```Bash
 docker build -f Dockerfile .
