@@ -125,3 +125,26 @@ sudo systemctl restart docker
 ```Bash
 docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
 ```
+You should see something like this output:
+```Shell Session
+mpcrpaul@mpcrpaul-MS-7B61:~$ docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
+Thu Feb 20 04:09:27 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.56       Driver Version: 418.56       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 108...  Off  | 00000000:01:00.0  On |                  N/A |
+| 23%   38C    P8    19W / 250W |   8824MiB / 11177MiB |      3%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce GTX 108...  Off  | 00000000:03:00.0 Off |                  N/A |
+| 23%   28C    P8     8W / 250W |   7589MiB / 11178MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
++-----------------------------------------------------------------------------+
+```
