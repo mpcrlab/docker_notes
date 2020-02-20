@@ -4,19 +4,19 @@ These commands should be run in the terminal on Ubuntu.
 If these instructions, don't work, run the commands from [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/) or google "install docker ce ubuntu".
 
 1. Update and make sure `curl` is installed to download the install script.
-```
+```Bash
 sudo apt-get update
 sudo apt-get install -y curl
 ```
 
 2. Download and run the Docker install script.
-```
+```Bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
 3. add the current user to the "docker" group, so we can run commands without `sudo`
-```
+```Bash
 sudo usermod -aG docker $(whoami)
 ```
 # Install CUDA Driver (Required to use GPUs)
@@ -24,7 +24,7 @@ sudo usermod -aG docker $(whoami)
 Only do this part if you don't already have a CUDA driver installed.
 
 0. Check if you have a CUDA driver already installed by running `nvidia-smi` in the terminal. If the command outputs something like this, you can skip the rest of this section.
-```
+```Shell Session
 mpcrpaul@mpcrpaul-MS-7B61:~$ nvidia-smi
 Wed Feb 19 21:20:21 2020       
 +-----------------------------------------------------------------------------+
