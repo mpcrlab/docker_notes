@@ -75,6 +75,80 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 * The `stop` command will stop a running container, given its name or ID.
 
 ---
+##### Open a terminal in a running container
+```Shell Session
+mpcrpaul@mpcrpaul-MS-7B61:~$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+1289374395d5        ubuntu              "/bin/bash"         4 minutes ago       Up 15 seconds                           youthful_wiles
+```
+```Bash
+docker exec -it youthful_wiles /bin/bash
+```
+* The `exec` command runs the `/bin/bash` program in our `youthful_wiles` container.
+* The `-it` flags make the terminal interactive.
+* You can open multiple terminals at the same time by running `exec` twice.
+* `exec` can run any program in the container's filesystem, not just terminals.
+
+---
+##### Delete images and stopped containers
+```Bash
+docker rm ubuntu_terminal2
+docker container rm ubuntu_terminal2
+docker image rm ubuntu
+```
+* `rm` will remove either images or containers by their names/IDs.
+* `container rm` and `image rm` are more verbose ways of saying the same thing.
+
+---
+##### Auto-delete a container after it finishes running
+```Bash
+docker run -it --rm ubuntu:latest /bin/bash
+```
+* The `--rm` flag will automatically delete the container after the terminal session ends.
+
+---
+##### Bind Port Forwards
+```Bash
+docker run -p 7777:8888 -p 7778:8889 jupyter/tensorflow-notebook
+```
+* The `-p` flag will add a port forward from the container to the host. Ports are given as [HOST]:[CONTAINER].
+* In this case, a jupyter notebook is running at `localhost:8888` in the container by default.
+* Since we mounted the container's port 8888 at our host's 7777, we will see the notebook at `localhost:7777` in the browser.
+* Multiple `-p` flags can be given to forward multiple ports.
+
+---
+##### Bind Mount Volumes
+```Bash
+docker run -p 7777:8888 -v /home:/external jupyter/tensorflow-notebook
+```
+```Shell Session
+jovyan@18066f01c6be:~$ ls /external
+mpcrpaul  pmorris2012
+```
+* The `-v` flag will mount a host folder in the container's filesystem. Folder paths are given as [HOST]:[CONTAINER].
+* In this case, our home folder will be located at `/external` in the container.
+* Multiple `-v` flags can be given to mount multiple folders.
+
+---
+##### Run a container with GPUs
+```Bash
+docker run --gpus all -it nvidia/cuda:10.1-cudnn7-devel /bin/bash
+docker run --gpus 1 -it nvidia/cuda:10.1-cudnn7-devel /bin/bash
+docker run '"device=0,1"' -it nvidia/cuda:10.1-cudnn7-devel /bin/bash
+```
+* The `--gpus` flag will start a container with the Nvidia-Docker runtime.
+* `all` will use all GPUs on the host. `1`, `2`, etc. will use 1 or 2 GPUs. Specific Device IDs can also be given.
+
+---
+##### Increase Shared Memory in a container
+```Bash
+docker run --gpus all -it --ipc="host" nvidia/cuda:latest /bin/bash
+```
+* If your code uses message passing (MPI) or other multiprocessing, it might need to share memory between processes.
+* The `--ipc` flag sets the "inter-process communication" mode. Set it to `"host"` to allow all memory to be shared.
+* If you get a weird error about a PyTorch dataloader process terminating early, this flag might fix it.
+
+---
 ##### Name/Rename containers
 ```Bash
 docker run -it --name ubuntu_terminal ubuntu:latest /bin/bash
