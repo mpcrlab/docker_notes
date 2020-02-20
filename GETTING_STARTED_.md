@@ -1,4 +1,4 @@
-# Docker Client Cheatsheet
+# Getting Started with the Docker Client
 
 ##### View docker images currently downloaded on your host computer
 ```Bash
