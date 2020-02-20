@@ -27,9 +27,9 @@
 
 | Command | Description |
 | --- | --- |
-| `docker build .` | Build Image from the Dockerfile in the current folder. |
+| `docker build .` | Build Image from Dockerfile in current folder |
 | `docker build -f Dockerfile .` | Build Image with a specific Dockerfile |
-| `docker build -f Dockerfile -t [NAME:TAG] .` | Build Image with name and tag |
+| `docker build -t [NAME:TAG] .` | Build Image with [NAME] and [TAG] |
 
 #### Manage Containers
 
