@@ -42,3 +42,22 @@
 | `docker container rm [CONTAINER]` | Delete a Stopped Container |
 | `docker rename [CONTAINER] [NEW_NAME]` | Rename container |
 
+#### Run Containers
+
+| Command | Description |
+| --- | --- |
+| `docker run [IMAGE]` | Run container with default CMD |
+| `docker run -it [IMAGE] /bin/bash` | Start with an Interactive Terminal |
+| `docker exec -it [CONTAINER] /bin/bash` | Open Interactive Terminal in Running Container |
+| `docker run [IMAGE] [YOUR_PROGRAM]` | Start container with [YOUR_PROGRAM] command |
+| `docker exec [CONTAINER] [YOUR_PROGRAM]` | Run [YOUR_PROGRAM] in Running Container |
+| `docker run --rm [IMAGE]` | Run container in auto-remove mode |
+| `docker run -p [HOST_PORT]:[CONTAINER_PORT] [IMAGE]` | Start Container with Port Forward |
+| `docker run -v [HOST_FOLDER]:[CONTAINER_FOLDER] [IMAGE]` | Start Container with Volume Mount |
+| `docker run --gpus all [IMAGE]` | Use Nvidia-Docker Runtime |
+| `docker run --gpus 2 [IMAGE]` | Specify # of GPUs |
+| `docker run --gpus '"device=0,1"' [IMAGE]` | Specify GPU Device IDs |
+| `docker run --ipc="host" [IMAGE]` | Use Host's Shared Memory to avoid multiprocessing errors |
+| `docker run --name [NAME] [IMAGE]` | Start Container with name [NAME] |
+
+
