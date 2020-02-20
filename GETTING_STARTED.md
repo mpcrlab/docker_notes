@@ -19,6 +19,15 @@ docker pull nvidia/cuda:10.2-cudnn7-devel
 ```
 
 ---
+##### Build an image from a Dockerfile
+```Bash
+docker build -f Dockerfile .
+```
+* The `build` command creates an image from the instructions in a Dockerfile.
+* `.` is the folder that will be used as the "context" of the build. The files in this folder are available during the build process. Using `.`, the current folder in the terminal, is a good default.
+* The `-f` flag specifies which file to use as the Dockerfile. If this flag isn't given, the file named `Dockerfile` with no extension in the current directory will be used.
+
+---
 ##### Start a container from an image with an interactive terminal
 ```Bash
 docker run -it ubuntu:latest /bin/bash
