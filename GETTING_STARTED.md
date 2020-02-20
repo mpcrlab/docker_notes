@@ -19,7 +19,7 @@ docker pull nvidia/cuda:10.2-cudnn7-devel
 ```
 
 ---
-##### Build an image from a Dockerfile
+##### Write a Dockerfile
 ```Dockerfile
 #Dockerfile
 
@@ -46,6 +46,8 @@ CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--al
 * `CMD` says what program will start by default when the image is used to run a container.
 * The Dockerfile commands are confusing, so never write them yourself. Always copy and paste from the internet!
 
+---
+##### Build an image from a Dockerfile
 ```Bash
 docker build -f Dockerfile .
 ```
