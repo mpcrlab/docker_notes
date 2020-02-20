@@ -103,6 +103,8 @@ sudo reboot
 
 # Install Nvidia-Docker (Required to use GPUs)
 
+If these instructions don't work, follow along [here](https://github.com/NVIDIA/nvidia-docker).
+
 1. Add the Nvidia-Docker repository
 ```Bash
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
