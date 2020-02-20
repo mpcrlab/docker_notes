@@ -56,4 +56,32 @@ Wed Feb 19 21:20:21 2020
 +-----------------------------------------------------------------------------+
 ```
 
+1. Add this 3rd party NVIDIA graphics drivers repository
+```Bash
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+```
 
+2. List the available drivers by running `ubuntu-drivers devices`. Output should look something like this (Note the driver versions):
+```Shell Session
+mpcrpaul@mpcrpaul-MS-7B61:~$ ubuntu-drivers devices
+== /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
+vendor   : NVIDIA Corporation
+modalias : pci:v000010DEd00001B06sv000010DEsd0000120Fbc03sc00i00
+driver   : nvidia-384 - distro non-free
+driver   : nvidia-430 - third-party free recommended
+driver   : nvidia-410 - third-party free
+driver   : nvidia-415 - third-party free
+driver   : nvidia-418 - third-party free
+driver   : xserver-xorg-video-nouveau - distro free builtin
+```
+
+3. Install the graphics driver version you want (i.e. `nvidia-418`). Try the most recent one if you're not sure, and downgrade if that breaks anything. Compatibility between driver versions and CUDA Toolkit versions can be found in [this table](https://docs.nvidia.com/deploy/cuda-compatibility/index.html#binary-compatibility__table-toolkit-driver).
+```Bash
+sudo apt-get install nvidia-[VERSION]
+```
+
+4. Restart your computer, and `nvidia-smi` should work.
+```
+sudo reboot
+```
